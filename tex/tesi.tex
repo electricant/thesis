@@ -1,0 +1,77 @@
+% Document Class and packages
+\documentclass[a4paper]{memoir}
+\usepackage{subfiles}
+\usepackage[utf8]{inputenc}
+\usepackage[italian]{babel}
+\usepackage{graphicx}
+\usepackage[usenames,dvipsnames,svgnames,table]{xcolor}
+\usepackage{geometry}
+\usepackage{cite}
+
+% about:author
+\author{Paolo Scaramuzza}
+\title{Studio dell' efficienza di oscillatori LC integrati per impulsatori 
+	Ultra Wide Band}
+\date{} % HACK: avoids date in the title
+
+\begin{document}
+\subfile{tex/front} % make a nice front page (thanks HammondSmoking)
+\cleardoublepage
+\newpage
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Abstract
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\pagenumbering{gobble} % no need for numbering
+\begin{vplace}[0.7]
+\begin{abstract}
+Abstract goes here.
+\end{abstract}
+\end{vplace}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Index
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\cleardoublepage
+\newpage
+\tableofcontents
+
+\pagenumbering{arabic} % restore normal page numbering
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Introduzione
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\cleardoublepage
+\chapter{Introduzione}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Lo stato dell' arte
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\cleardoublepage
+\chapter{Lo stato dell' arte}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% La simulazione
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\cleardoublepage
+\chapter{La simulazione}
+\cite{Razavi11}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Risultati numerici
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\cleardoublepage
+\chapter{Risultati numerici}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Conclusione e sviluppi futuri
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\cleardoublepage
+\chapter{Conclusione}
+
+\section{Sviluppi futuri}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Bibliografia
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\bibliographystyle{plain}
+\bibliography{tex/biblio}
+\end{document}
