@@ -1,0 +1,18 @@
+# plot efficienza.dat
+#
+clear
+set xlabel 'L1'
+set ylabel 'L2'
+set xr [60:260]
+set yr [100:500]
+set xtics (70, 75, 100, 150, 175, 200, 250)
+set ytics (150, 200, 300, 400, 450)
+set label 'Iniziale' at 225,125
+set arrow from 223,125 to 203,148
+plot "graphs/efficienza.dat" with labels offset 1,1 notitle, \
+	"graphs/efficienza.dat" title 'eff. reale' pt 7 , \
+	x with lines title 'n=1'
+set term postscript 8
+set output "efficienza.ps"
+replot
+set term x11
