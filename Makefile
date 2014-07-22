@@ -5,10 +5,10 @@ PDFLATEX=pdflatex -file-line-error -halt-on-error
 
 all: tesi.pdf
 
-prepare: tex/tesi.tex
+prepare: tex/tesi.tex graphs
 	@$(PDFLATEX) tex/tesi.tex
 
-tesi.pdf: prepare graphs main.bbl
+tesi.pdf: prepare main.bbl
 	@$(PDFLATEX) tex/tesi.tex
 	
 main.bbl: tex/biblio.bib
