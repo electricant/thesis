@@ -8,7 +8,7 @@ all: tesi.pdf
 prepare: tex/tesi.tex
 	@$(PDFLATEX) tex/tesi.tex
 
-tesi.pdf: prepare main.bbl
+tesi.pdf: prepare graphs main.bbl
 	@$(PDFLATEX) tex/tesi.tex
 	
 main.bbl: tex/biblio.bib
@@ -17,8 +17,14 @@ main.bbl: tex/biblio.bib
 front.pdf: tex/front.tex
 	@$(PDFLATEX) tex/front.tex
 
+graphs: efficienza.pdf
+
+efficienza.pdf: graphs/efficienza.dat graphs/eff_plot
+	@gnuplot graphs/eff_plot
+	@ps2pdf efficienza.ps
+	
 clean:
-	@rm -f *.pdf *.out *.aux *.log *.toc *.bbl *.blg
+	@rm -f *.pdf *.out *.aux *.log *.toc *.bbl *.blg *.ps
 
 soft-clean:
-	@rm -f *.out *.aux *.log *toc *.bbl *.blg
+	@rm -f *.out *.aux *.log *toc *.bbl *.blg *.ps
