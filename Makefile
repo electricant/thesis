@@ -15,8 +15,8 @@ tesi.pdf: prepare main.bbl
 main.bbl: tex/biblio.bib
 	@bibtex tesi
 
-front.pdf: tex/front.tex
-	@$(PDFLATEX) tex/front.tex $(COLOR)
+%.pdf: tex/%.tex
+	@$(PDFLATEX) $< $(COLOR)
 
 graphs: efficienza.pdf
 
