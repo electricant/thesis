@@ -8,7 +8,7 @@
 
 % about:author
 \author{Paolo Scaramuzza}
-\title{Studio dell' efficienza di oscillatori LC integrati per impulsatori 
+\title{Studio dell'efficienza di oscillatori LC integrati per impulsatori 
 	Ultra Wideband}
 \date{} % HACK: avoids date in the title
 
@@ -22,15 +22,75 @@
 % Introduzione
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Introduzione}
+\begin{itemize}
+	\item Riprendere ed espandere il discorso del primo paragrafo
+		dell'abstract citando la fonte delle leggi che hanno regolamentato
+		la banda tra 3.1 e 10.6GHz.
+		(W. Hirt, The european UWB radio regulatory \ldots)
+	
+	\item Citare possibili applicazioni, rifacendosi ad articoli riguardo
+	\begin{itemize}
+		\item Localizzazione di precisione (T.\ Terada, S.\ Yoshizumi et.\
+			al.\, A CMOS impulse radio ultra-wideband transceiver for
+			1Mb/s data communications and $\pm 2.5cm$ range findings)
+		\item Trasmissione (S. Gambini, J. Crossley, E. Alon and J. Rabaey,
+			A fully integrated 290pJ/bit UWB dual-mode \ldots)
+			(Neviani, vari)
+	\end{itemize}
 
+	\item Dire perché si usa una topologia \emph{cross-coupled}, presentarne
+		lo schema e spiegarne in breve il funzionamento
+	\item Accennare ai contributi apportati e al fatto che simulazioni e
+		teoria sono concordi
+	\item Due parole sulla struttura dell'elaborato
+\end{itemize}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% La simulazione
+% Topologie e parametri
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{La simulazione}
-
+\section{Topologie e parametri di interesse}
+\begin{itemize}
+	\item Descrizione delle topologie: Tipo 1 e Tipo 2 (con invertitori)
+	\item Modello del trasformatore (cosa si è trascurato e perché)
+	\item Presentazione del modello semplificato del circuito in rapporto 	
+		all'oscillatore vero e proprio (Dimostrazione sintetica di come si
+		giunge dal modello con trasformatore al solo generatore connesso ad
+		un partitore di corrente)
+	\item Discussione dei parametri di interesse e effetto delle
+		loro variazioni dal punto di vista teorico (qualche grafico)
+\end{itemize}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Risultati numerici
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Risultati numerici}
-
+\begin{itemize}
+	\item Descrizione delle simulazioni in regime transitorio
+	\item Discussione dei risultati ottenuti in rapporto a quelli teorici
+	\item Presentazione dei parametri del trasformatore che garantiscono
+		la massima efficienza e confronto con la simulazione del
+		trasformatore da solo (differiscono dell' $ 1\% $)
+	\item Interpretazione dei precedenti risultati
+	\item Confronto dell'efficenza delle due topologie 
+		($ 29.4\% $ tipo 1 rispetto $ 28.1\% $ tipo 2)
+	\item Confronto tempi di accensione e spegnimento quando vengono impulsati
+	\item Dire che il tipo 2, vista la differenza trascurabile tra le due
+		figure di efficienza, può essere migliore dal punto di vista 
+		dell'impiego di area perché il PMOS è di dimensioni minime mentre 
+		ho due NMOS di dimensioni comparabili a quelli dell'oscillatore 
+		($ 280\mu m $) e non 3 da $ 260\mu m $
+\end{itemize}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Conclusione
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Conclusione}
+Riassumere il lavoro e i risultati ottenuti in una mezza pagina.
+\subsection{Sviluppi futuri}
+\begin{itemize}
+	\item Dal momento che non si è analizzato il layout e l'efficienza delle
+		due topologie è molto simile può essere interessante valutare la 
+		minima area occupata da entrambe
+	\item Un migliore modello di trasformatore può garantire un'accuratezza
+		migliore nei risultati della simulazione
+	\item Si è valutato il consumo di potenza solo ad oscillatore attivo.
+		Sarebbe da valutare anche il consumo in funzionamento impulsato
+\end{itemize}
 \end{document}
