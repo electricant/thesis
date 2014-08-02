@@ -39,12 +39,73 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \cleardoublepage{}
 \chapter{Introduzione}
+Contrariamente a molte tecnologie in radiofrequenza oggi in uso, la radio a
+impulsi Ultra-Wideband (\emph{Ultra-Wideband Impulse-Radio}, UWB IR)
+sfrutta un' ampia porzione dello spettro delle radiofrequenze (di ampiezza
+maggiore a 500MHz oppure più del 25\% della frequenza di centro-banda
+\cite{Neviani12}) trasmettendo i dati sotto forma di impulsi di breve durata.\\
+Tra gli schemi di modulazione impiegati si trovano: 
+\begin{itemize}
+	\item \emph{on-off keyng} (OOK)
+	\item \emph{pulse-position modulation} (PPM)
+\end{itemize}
+
+Per molti anni la UWB IR è stata impiegata esclusivamente in ambito
+militare. Nel 2002, con la regolamentazione dello spettro di frequenze tra 3.1 
+e 10.6GHz da parte degli Stati Uniti e in seguito dall'Europa e dal Giappone,
+la radio UWB ha iniziato ad affermarsi quale soluzione più conveniente, sia dal
+punto di vista economico che prestazionale, per la comunicazione a corto raggio.
+\\La massima densità spettrale di potenza in trasmissione consentita dalle
+leggi europee è di $ -41.3 dBm/MHz $ e in alcuni segmenti dello spettro tale
+limite può arrivare fino a $ -75 dBm/MHz $, come evidenziato in\cite{Hirt07}.\\
+Vista la bassa potenza di trasmissione e le elevate frequenze operative,
+le radio a impulsi UWB ben si prestano ad essere realizzate interamente in
+tecnologia CMOS.\@
+Si possono avere così trasmettitore e ricevitore in un unico circuito integrato.
+\\Tra le possibili applicazioni di questa tecnologia si trovano: la
+localizzazione di precisione e la trasmissione a corto raggio.
+
+Per la localizzazione si cita\cite{Terada05} in cui si mostra una radio 
+Ultra-Wideband realizzata in tecnologia CMOS da $ 180nm $ in grado di
+effettuare localizzazioni a più di un metro di distanza con un errore massimo
+di $ \pm 2.5cm $.
+Quando si effettuano mille misurazioni al secondo il consumo di potenza è pari
+a $ 0.7\mu W $. Il trasmettitore e il ricevitore sono integrati in un unico
+chip avente un' area di $ 0.415mm^2 $.
+
+Per la trasmissione a corto raggio significativi risultati sono stati raggiunti
+da\cite{RabaeyEECS},\cite{Neviani12} e\cite{Gambini12} in cui sono dimostrate
+varie soluzioni circuitali che permettono di ottenere, in un unico circuito
+integrato di piccole dimensioni, sia la funzionalità di trasmettitore che di
+ricevitore.
+
+Attualmente la frontiera della ricerca si sta spostando verso una sempre
+maggiore integrazione e un miglioramento globale dell'efficienza energetica.
+Questi risultati della Ricerca permettono di avere una durata della batteria che
+alimenta il circuito estremamente lunga o di far funzionare le radio tramite
+\emph{energy harvesting}.\\
+Un esempio significativo è\cite{Danesh11} in cui si ha un nodo sensore 
+alimentato da un pannello solare di $ 2\times2 cm^2 $ che svolge anche la
+funzione di antenna. Il sensore è poco più grande del pannello solare, consuma
+solamente $ 10\mu W $ di potenza e trasmette i dati a intervalli di un
+minuto alla velocità di $ 1 KB/s $ tramite la modulazione \emph{on-off
+keying}.
+Con l' impiego di un supercondensatore, inoltre, è in grado di lavorare in
+condizioni di totale assenza di illuminazione per più di due giorni.\\
+In\cite{Solda10} infine è dimostrata la realizzazione di una radio a impulsi 
+che garantisce un' efficienza in trasmissione pari al 7\% mentre in 
+\cite{Neviani14} si raggiunge l' 11,7\%, valore che rappresenta l' attuale
+stato dell'arte.
+
+La presente tesi parte proprio dai risultati ottenuti in~\cite{Neviani12} e
+\cite{Neviani14} e mira a massimizzare l'efficienza energetica dell'oscillatore
+LC \emph{cross-coupled} in uso nell'impulsatore.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% La simulazione
+% Tipologie e parametri
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \cleardoublepage{}
-\chapter{La simulazione}
+\chapter{Topologie e parametri di interesse}
 \cite{Razavi11}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%
