@@ -11,7 +11,8 @@ prepare: tex/tesi.tex graphs
 
 tesi.pdf: prepare main.bbl
 	@$(PDFLATEX) tex/tesi.tex $(COLOR)
-	
+	@$(PDFLATEX) tex/tesi.tex $(COLOR)
+
 main.bbl: tex/biblio.bib
 	@bibtex tesi
 
