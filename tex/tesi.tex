@@ -3,13 +3,17 @@
 \usepackage{subfiles}
 \usepackage[utf8]{inputenc}
 \usepackage[italian]{babel}
+\usepackage{microtype}
 \usepackage{graphicx}
 \usepackage[usenames,dvipsnames,svgnames,table]{xcolor}
-\usepackage{geometry}
+\usepackage[a4paper, bindingoffset=1cm]{geometry}
 \usepackage{cite}
+\usepackage{hyperref}
 
 % Increase space between paragraphs
 \setlength{\parskip}{3pt}
+% increase space between lines
+\linespread{1.2}
 
 % about:author
 \author{Paolo Scaramuzza}
@@ -40,7 +44,6 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Introduzione
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\cleardoublepage{}
 \chapter{Introduzione}
 Contrariamente a molte tecnologie in radiofrequenza oggi in uso, la radio a
 impulsi Ultra-Wideband (\emph{Ultra-Wideband Impulse-Radio}, UWB IR)
@@ -113,7 +116,7 @@ In Figura 1.1 è rappresentato lo schema elettrico di un oscillatore LC
 \end{figure}
 \`E la tipologia di oscillatore più diffusa nei circuiti integrati perché il
 rumore di fase è più basso rispetto ad altre soluzioni e richiede un basso
-numero di componenti attivi\cite{Amran05}.
+numero di componenti attivi\cite{Amran05}\cite{RazaviRF}.
 
 Il suo funzionamento si basa sulla risonanza tra l'induttanza e la capacità
 presenti nel circuito. \\
@@ -147,7 +150,7 @@ Riorganizzando lo schema circuitale si riottiene quello in Figura 1.1.
 
 \begin{figure}[h]
 \centering
-\includegraphics[width=0.4\textwidth]{images/LCsingle.pdf}
+\includegraphics[width=0.5\textwidth]{images/LCsingle.pdf}
 \caption{Schema per il singolo ramo dell'oscillatore}
 \end{figure}
 
@@ -181,26 +184,121 @@ La scelta di un tipo di oscillatore piuttosto che l' altro deve dunque essere
 dettata da altri parametri (ad esempio l' occupazione di area ed il consumo
 dinamico di potenza) che esulano dal contributo di questa tesi e sono solo
 accennati.
-
+\newpage
 \section{Struttura dell'elaborato}
 Il presente elaborato è organizzato come segue:
 \begin{itemize}
-\item Nel Capitolo 2 sono presentate le due diverse tipologie di oscillatore
+\item nel Capitolo 2 sono presentate le due diverse tipologie di oscillatore
 	prese in esame. \`E discusso come da essi si giunga ad un modello
 	semplificato e si presenta un'analisi qualitativa degli effetti
 	sull'efficienza del diverso dimensionamento dei componenti nel
-	modello ottenuto
+	modello ottenuto.
 \item Nel Capitolo 3 sono presentati e discussi i risultati numerici delle
-	simulazioni, confrontando le diverse topologie dell'oscillatore
+	simulazioni, confrontando le diverse topologie dell'oscillatore.
 \item Il Capitolo 4 è dedicato agli sviluppi futuri e alla discussione dei
 	parametri di interesse la cui valutazione si presta ad ulteriori studi.
 \end{itemize}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Tipologie e parametri
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\cleardoublepage{}
 \chapter{Topologie e parametri di interesse}
-\cite{RazaviRF}
+Come è stato descritto nel capitolo precedente, sono stati analizzati due
+diversi oscillatori LC in topologia \emph{cross coupled} per la realizzazione di
+impulsatori ultra-wideband.
+
+\section{Le topologie}
+In Figura 2.1 è presentato lo schema dell'oscillatore denominato di Tipo 1.\\
+Alla topologia basilare è aggiunto un NMOS (indicato con M3) con
+drain e source connessi tra l' oscillatore e la massa. L'accensione e lo
+spegnimento avvengono fornendo al gate di M3 un valore logico rispettivamente
+alto e basso.\\
+\begin{figure}[h]
+\centering
+\includegraphics[width=0.67\textwidth]{images/tipo1.pdf}
+\caption{Schema elettrico dell'oscillatore di Tipo 1. Si noti l' NMOS M3, la
+      cui funzione è quella di connettere o disconnettere il circuito
+	dall'alimentazione.}
+\end{figure}
+Quando M3 è spento, ovvero quando la tensione tra gate e drain è
+nulla, esso si comporta come un circuito aperto e dunque l'oscillatore non
+viene alimentato. Quando invece M3 è in saturazione, ovvero quando la tensione 
+al gate supera la tensione di soglia, la sua resistenza è molto bassa e dunque 
+il circuito viene chiuso e l'oscillatore inizia a funzionare.
+
+In Figura 2.2 è presentato lo schema dell'oscillatore denominato di Tipo 2.\\
+Rispetto alla soluzione precedente una coppia di invertitori in logica
+complementare è connessa ai gate degli NMOS dell'oscillatore. L'accensione e
+lo spegnimento avvengono quando all'ingresso degli invertitori si presenta un
+valore logico basso o alto.
+\begin{figure}[h]
+\centering
+\includegraphics[width=0.75\textwidth]{images/tipo2.pdf}
+\caption{Schema elettrico dell'oscillatore di Tipo 2. Gli invertitori CMOS
+      connessi ai gate di M1 e M2 attivano o cortocircuitano a massa le
+      oscillazioni.}
+\end{figure}
+\clearpage % leave space for the pictures
+\noindent Quando \texttt{STOP} è alto sono attivi gli NMOS degli invertitori
+che portano i gate di M1 e M2 a massa, impedendo all'oscillatore di funzionare.
+Quando \texttt{STOP} è basso invece sono i PMOS ad essere attivi. I gate di M1
+e M2 sono ora connessi a Vdd tramite una resistenza di dimensioni dell'ordine
+della decina di Kiloohm e dunque l'oscillatore viene attivato.
+
+\section{Il trasformatore}
+Date le topologie di oscillatore presentate nella sezione precedente, il
+trasformatore è l'elemento che più incide sull'efficienza della trasmissione.
+Esso svolge infatti il ruolo fondamentale di trasformare, senza l'impiego di
+ulteriori componenti attivi, la tensione differenziale presente al primario in
+quella adatta a pilotare l'antenna\cite{Neviani14}.
+
+Nei circuiti integrati induttanze e trasformatori sono realizzati come
+spirali metalliche nello strato di \emph{metal} più superficiale (che è anche
+lo strato più spesso).\\
+A causa di questa struttura fisica si hanno dei componenti parassiti tra i
+quali si annoverano\cite[pp. 431-455]{RazaviRF}:
+\begin{description}
+\item[capacità] tra le spire e il substrato, tra le spire e gli strati di
+	\emph{metal} adiacenti e tra le spire stesse;
+\item [resistori] dovuti alla resistenza serie del metallo che compone
+	l'induttanza, all'effetto pelle e all'accoppiamento capacitivo con il
+	substrato;
+\item [induttori] dovuti all'accoppiamento magnetico con il substrato e con le 
+	piste adiacenti.
+\end{description}
+Tutti questi parametri concorrono a degradare il fattore di qualità
+dell'induttore.
+
+Per effettuare le simulazioni è stato necessario produrre un modello per il
+trasformatore che tenesse adeguatamente conto degli effetti sopracitati.\\
+Si è valutato di restringere il campo ai soli elementi resistivi al fine di
+ottenere dei dati semplificati utilizzabili per il confronto delle due
+tipologie di oscillatore. L' inclusione degli altri elementi parassiti può
+rappresentare uno stimolo per ulteriori studi e per affinare l' efficienza una
+volta determinata la soluzione circuitale migliore.
+\begin{figure}[h]
+\centering
+\includegraphics[height=0.2\textheight]{images/ic_inductor.JPG}
+\caption{Microfotografia di un induttore in un circuito integrato
+	\hspace{\textwidth} % force newline
+	\footnotesize{Fonte: \url{http://people.seas.harvard.edu/~jones/es154
+	/lectures/lecture_0}}}
+\end{figure}
+
+Il modello ottenuto per il trasformatore è presentato in Figura 2.4.
+Tutti gli effetti indesiderati sono riassunti da una resistenza in serie al
+primario divisa a metà tra i due rami. Tale resistenza è calcolata di volta in
+volta, a partire dal valore di induttanza al primario, in modo da mantenere il
+fattore di qualità Q a 25 per una frequenza di 8GHz.\\
+La formula che lega il fattore di qualità al valore di $L_1$ è:
+$ Q = 2\pi f_{osc} \frac{L_1}{R_p} $,\\
+dove $R_p$ è la resistenza parassita al primario e $ f_{osc}=8GHz $.
+\begin{figure}[h]
+\centering
+\includegraphics[height=0.34\textheight]{images/trasf_model.pdf}
+\caption{Modello di trasformatore usato nelle simulazioni}
+\end{figure}
+\clearpage % pictures please
+\section{Il modello teorico}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Risultati numerici
