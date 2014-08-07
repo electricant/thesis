@@ -19,7 +19,11 @@ main.bbl: tex/biblio.bib
 %.pdf: tex/%.tex
 	@$(PDFLATEX) $< $(COLOR)
 
-graphs: efficienza.pdf
+graphs: efficienza.pdf effteor.pdf
+
+effteor.pdf: graphs/effteor_plot
+	@gnuplot graphs/effteor_plot
+	@ps2pdf effteor.ps
 
 efficienza.pdf: graphs/efficienza.dat graphs/eff_plot
 	@gnuplot graphs/eff_plot

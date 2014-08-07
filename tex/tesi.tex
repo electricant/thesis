@@ -9,6 +9,8 @@
 \usepackage[a4paper, bindingoffset=1cm]{geometry}
 \usepackage{cite}
 \usepackage{hyperref}
+\usepackage{float}
+\usepackage{caption}
 
 % Increase space between paragraphs
 \setlength{\parskip}{3pt}
@@ -244,6 +246,7 @@ Quando \texttt{STOP} è basso invece sono i PMOS ad essere attivi. I gate di M1
 e M2 sono ora connessi a Vdd tramite una resistenza di dimensioni dell'ordine
 della decina di Kiloohm e dunque l'oscillatore viene attivato.
 
+%%% TRASFORMATORE
 \section{Il trasformatore}
 Date le topologie di oscillatore presentate nella sezione precedente, il
 trasformatore è l'elemento che più incide sull'efficienza della trasmissione.
@@ -298,8 +301,225 @@ dove $R_p$ è la resistenza parassita al primario e $ f_{osc}=8GHz $.
 \caption{Modello di trasformatore usato nelle simulazioni}
 \end{figure}
 \clearpage % pictures please
-\section{Il modello teorico}
 
+%%% MODELLO TEORICO
+\section{Il modello teorico}
+Per il lavoro di simulazione al calcolatore si è deciso di ricorrere 
+all'analisi preliminare di un modello teorico che permettesse di valutare
+qualitativamente i parametri che più influenzano l'efficienza energetica.\\
+Il modello è stato utilizzato inoltre per confermare e supportare i risultati
+emersi dalle simulazioni.
+
+Si è partiti dall'oscillatore di Tipo 1 (Figura 2.1) e si sono formulate le
+seguenti ipotesi:
+\begin{enumerate}
+\item l'oscillatore è attivo e si è esaurito l'effetto del transitorio
+	iniziale;
+\item il circuito funziona in regime limitato in tensione, ovvero l'ampiezza
+	delle oscillazioni dipende solo dalla tensione di alimentazione;
+\item la caduta di tensione sui componenti attivi del circuito è trascurabile;
+\item il valore complessivo della capacità è tale da entrare in risonanza con
+	l'induttanza totale del circuito.
+\end{enumerate}
+L'ipotesi 1. è dettata dal fatto che nel presente elaborato si valuta 
+l'efficienza a regimedell' oscillatore, trascurando la potenza dissipata per
+produrre gli impulsi.\\
+L'ipotesi 2. è ragionevole se gli NMOS sono adeguatamente dimensionati e dunque
+al primario si ha un'oscillazione differenziale di ampiezza $2V_{DD}$.\\
+L'ipotesi 3. è utile per restringere l'analisi al solo trasformatore e sarà
+rilassata in seguito.\\
+L'ipotesi 4. è suffragata dalla natura stessa del funzionamento 
+dell'oscillatore che lavora alla frequenza di risonanza tra induttanza e
+capacità presenti nel circuito·
+\begin{figure}[h!]
+\centering
+\includegraphics[height=0.12\textheight]{images/cir_model.pdf}
+\caption{Modello teorico dell'oscillatore}
+\end{figure}
+
+Tali ipotesi permettono d approssimare il circuito con un generatore
+ideale di tensione sinusoidale di ampiezza $2V_{DD}$, connesso alla serie tra
+una resistenza e il primario di un trasformatore. Il secondario è connesso
+direttamente alla resistenza di antenna (Figura 2.5).
+
+Al circuito così ottenuto si possono applicare le relazioni che permettono di
+passare dal doppio bipolo induttivo al trasformatore ideale con induttanza in
+eccedenza\cite[pp. 322-323]{GuarnieriET}. Sfruttando poi le proprietà del
+trasformatore ideale si ottiene la Figura 2.6, in cui le espressioni dei valori
+dei componenti sono:
+\noindent\begin{minipage}{0.5\textwidth}
+\begin{figure}[H]
+\includegraphics[width=\textwidth]{images/cir_model1.pdf}
+\caption{}
+\end{figure}
+\end{minipage}
+\hspace{0.1\textwidth}
+\noindent\begin{minipage}{0.4\textwidth}
+\noindent$ R_p = 2 \pi f_{osc} \frac{L_1}{Q} $ \\
+$ L_{1p} = K^2 L_1 $ \\
+$ L_{1e} = \left( 1 - K^2 \right) L_1 $ \\
+$ n' = \sqrt{\frac{L_{1p}}{L_2}} = K \sqrt{\frac{L_1}{L_2}} = Kn $\\
+$ R_a' = {\left( nk \right)}^2 R_a $
+\end{minipage}
+
+Ricorrendo infine alle trasformazioni serie-parallelo\cite[pp. 63-64]{RazaviRF}
+per la serie di $R_p $ e $L_{1e}$. Sapendo inoltre che per l'ipotesi 4. 
+la capacità e le induttanze sono in risonanza, il circuito che si determina è
+rappresentato in figura 2.7. 
+\noindent\begin{minipage}{0.35\textwidth}
+\begin{figure}[H]
+\includegraphics[width=\textwidth]{images/cir_model2.pdf}
+\caption{}
+\end{figure}
+\end{minipage}
+\hspace{0.25\textwidth}
+\noindent\begin{minipage}{0.4\textwidth}
+\`E un partitore di corrente.\\
+Il valore di $ R_p' $ è:\\
+$ R_p' = R_p \left(1 + Q^2 \right) $
+\end{minipage}
+L'efficienza è dunque:
+{\large$ \eta_t = \frac{P_{ant}}{P_{tot}} = \frac{R_p (1 + Q^2)}{n'R_a + 
+(1 + Q^2)R_p} $}
+\\Sostituendo a $R_p$ ed $n'$ le rispettive espressioni si ottiene:
+{\large$ \eta_t = \frac{2\pi f_{osc} L_2 (\frac{1}{Q} + Q)}{2\pi f_{osc} L_2
+(\frac{1}{Q} + Q) + K^2R_a } $ }
+
+Dalla precedente formula si evince come, in prima approssimazione, l'efficienza
+teorica sia solo funzione del fattore di qualità Q, del fattore di 
+accoppiamento K e dell'induttanza al secondario $L_2$.\\
+L' unico di questi parametri accessibile in fase di progetto è il valore di
+$L_2$, gli altri sono determinati dal \emph{layout} del trasformatore.\\
+L' efficienza teorica tende ad uno per $L_2$ che tende all'infinito. Il valore
+di $L_2$ deve dunque essere il più elevato possibile.
+
+Una volta isolato il contributo del trasformatore è possibile dedicarsi 
+all'effetto introdotto dai componenti attivi nel circuito.\\
+L' efficienza complessiva a regime è infatti il prodotto dell'efficienza del
+trasformatore ($\eta_t$) per l' efficienza dei componenti attivi ($\eta_a$):
+$ \eta = \eta_t \eta_a $.
+
+Con riferimento alla Figura 2.1 si ha che M3 è sempre attivo per l'ipotesi 1;
+M1 ed M2 invece conducono esattamente per metà del ciclo di oscillazione.\\
+Approssimando i \emph{transistor} con degli interruttori, dalla loro attività
+si ottiene un' onda quadra. Ricorrendo al termine del primo ordine dello 
+sviluppo in serie di Fourier, l' efficienza relativa ai componenti attivi può
+essere espressa dalla formula:{\large
+$\eta_a=\frac{\frac{2}{\pi}\left(V_{DD}-V_{DS,1}-V_{DS,3}\right)}{V_{DD}}$}
+\cite{Neviani14}.
+
+Supponendo di aver dimensionato gli NMOS in modo tale che la caduta di tensione
+tra \emph{drain} e \emph{source} sia trascurabile rispetto all'ampiezza delle
+oscillazioni ai loro capi\footnote{Nel capitolo seguente le simulazioni
+effettuate confermeranno la veridicità di questo assunto} si ha che: {\large 
+$\eta_a \approx \frac{2}{\pi} \approx 0,63$}. Tale valore rappresenta anche la
+massima efficienza teoricamente raggiungibile.
+\begin{figure}[h]
+\centering
+\includegraphics[height=0.365\textheight]{effteor.pdf}
+\caption{Efficienza per il modello teorico al variare di $L_2$ ($f_{osc} = 8GHz 
+$ e $K=0.54 $).}
+\end{figure}
+\clearpage
+
+%%% PARAMETRI DI INTERESSE
+\section{Parametri di interesse}
+Nella presente sezione si analizzano e discutono i componenti il cui valore ha
+un' influenza sull'efficienza della trasmissione dal punto di vista qualitativo.
+\\Al fine di snellire la trattazione si è ritenuto necessario dividere l'
+analisi nei tre ambiti: trasformatore e capacità, oscillatore di Tipo 1 e
+oscillatore di Tipo 2.
+
+\subsection{Trasformatore e capacità}
+Con riferimento alle figure 2.1, 2.4 e 2.7 si individuano:
+\begin{enumerate}
+\item[L1], ovvero l'induttanza al primario. Da essa dipende direttamente il
+	valore della resistenza parassita vista ai terminali \texttt{TRASF\_1} e
+	\texttt{TRASF\_2}.\\
+	Come precedentemente discusso, la resistenza parassita di $L_1$ può essere
+	convertita tramite le trasformazioni serie-parallelo in una resistenza
+	in parallelo all'antenna.\\
+	Dal momento che la corrente erogata dal circuito nel trasformatore si
+	divide tra la resistenza parassita e l' antenna è necessario che il
+	valore di $R_p'$ sia molto maggiore rispetto a $R_a'$.\\
+	Dall'analisi effettuata nella sezione precedente si desidera $L_2$ grande,
+	il che porta $n'$ ad essere piccolo e dunque anche $R_a' = n'R_a$ avrà un
+	valore dell'ordine di grandezza dell'ohm.\\
+	Essendo $R_p' = 2\pi f_{osc} L_1 \left(\frac{1}{Q} + Q \right)$ $L1$ deve
+	essere sufficientemente grande da rendere $R_p' \gg R_a'$.\\
+	Un valore troppo grande di $L1$ tuttavia aumenta la corrente che scorre
+	nel primario e dunque nei MOSFET del circuito. Se questi ultimi non sono
+	in grado di sopportare tali correnti la caduta di potenziale su di essi
+	si fa rilevante causando una drastica perdita di efficienza e il
+	passaggio da regime controllato in tensione a regime controllato in
+	corrente.
+
+\item[L2], ovvero l'induttanza al secondario. Da essa dipende il rapporto di
+	trasformazione e l'efficienza complessiva del trasformatore.\\
+	Il modello teorico richiede un valore elevato, al limite infinito, per la
+	sua induttanza.\\
+	Nel processo CMOS il fattore di qualità di un induttore degrada
+	rapidamente all'aumentare del numero di spire e della dimensione
+	dell'induttore stesso, sia a causa dell'elevata resistività delle piste
+	sia a causa dei contributi capacitivi\cite{RazaviRF}.\\
+	Un basso fattore di qualità al secondario aumenta l' energia dissipata
+	nell'induttanza, a scapito di quella erogata all'antenna.\\
+	All'aumentare di $L_2$ diminuisce il rapporto di trasformazione e con
+	esso la resistenza che deve essere pilotata dagli NMOS.\@ Analogamente a
+	quanto affermato per $L_1$ una corrente troppo elevata che scorre nei
+	componenti attivi va a detrimento dell'efficienza.
+
+\item[C], ovvero la capacità del \emph{tank}. Da essa e dall'induttanza
+	complessiva dipendono la frequenza di oscillazione e il
+	\emph{tuning-range} (intervallo di frequenze che può essere coperto
+	dall'oscillatore al variare di C, utile per recuperare variazioni nei
+	valori dei componenti a causa degli errori del processo).\\
+	La formula $ f_{osc}=\frac{1}{2\pi\sqrt{L_{tot}C_{tot}}}$ determina la
+	frequenza di oscillazione (si veda capitolo 1).
+	\\Il \emph{tuning-range} è definito come: $ R = f_{osc}^{(max)} -
+	f_{osc}^{(min)} $.\\
+	Valori elevati di $L_{tot}$ riducono l' influenza di C sulla massima e
+	minima frequenza raggiungibile. \`E dunque necessario scegliere il valore
+	nominale di C in modo da garantire l' oscillazione a $8GHz$, avendo
+	fissato $L1$ ed $L2$ ad un valore tale da ottenere il \emph{tuning-range}
+	desiderato.
+\end{enumerate}
+
+\subsection{Oscillatore di Tipo 1}
+Con riferimento alla Figura 2.1, una volta determinati i parametri ottimali per
+il trasformatore, è necessario assicurarsi che la caduta di tensione sugli NMOS
+sia trascurabile. Per fare ciò si aumenta il fattore di forma $Z = \frac{W}{L}$
+di M1 ed M2.\\
+Un fattore di forma troppo elevato, oltre ad incidere sull'area occupata dal 
+circuito, rende elevata la capacità parassita introdotta dagli NMOS degradando
+il \emph{tuning-range} e costringendo ad impiegare induttanze più piccole che,
+come si è visto riducono l' efficienza della trasmissione.
+
+Fondamentale è la dimensione di M3, scelta in modo che la caduta di tensione
+tra \emph{drain}e \emph{source} sia trascurabile e ai piccoli segnali il nodo
+in cui si incontrano i \emph{source} di M1 2 M2 si possa considerare a massa.
+
+Ricorrendo ad un M3 con fattore di forma elevato si ha un aumento dell'energia
+dissipata dalla circuiteria di controllo per accendere e spegnere il circuito.
+Aumenta inoltre il tempo di ritardo tra l' arrivo del segnale di controllo e 
+l'accensione o lo spegnimento dell'oscillatore.
+
+\subsection{Oscillatore di Tipo 2}
+Con riferimento alla Figura 2.2, per M1 ed M2 valgono le medesime
+considerazioni rispetto al Tipo 1.
+Due invertitori sono connessi ai \emph{gate} di tali MOSFET.
+
+Affinché l' oscillatore possa essere spento M3 ed M4 devono avere dimensioni 
+comparabili o maggiori di M1 ed M2, altrimenti il loro contributo non è 
+sufficiente per fermare le oscillazioni.\\
+I PMOS invece devono essere fortemente resistivi in modo che la loro resistenza
+non imponga un carico eccessivo su M1 ed M2.
+
+Il dimensionamento troppo elevato dei transistor che compongono l' invertitore
+aumenta la capacità vista dalla circuiteria di controllo e rallenta il tempo di 
+risposta al segnale di attivazione e spegnimento.\\
+\`E dunque auspicabile per i PMOS una dimensione minima e per gli NMOS 
+dell'invertitore una di poco più grande rispetto a quelli dell'oscillatore.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Risultati numerici
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%
