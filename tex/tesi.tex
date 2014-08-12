@@ -521,8 +521,71 @@ dell'invertitore una dimensione di poco più grande rispetto a quella dei
 % Risultati numerici
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \chapter{Risultati numerici}
-\includegraphics[width=\textwidth]{efficienza.pdf}
+Sono state effettuate tre tipologie di simulazioni distinte:
+\begin{itemize}
+\item La prima parte dall'oscillatore di Tipo 1 con gli stessi parametri
+	circuitali in \cite{Neviani14}, adattati al modello di trasformatore 
+	utilizzato. Questa rappresenta il punto di partenza e porge un'efficienza
+	in trasmissione pari al 10\%. A partire da questo valore si è fatto
+	variare il rapporto di trasformazione e il valore delle induttanze al
+	primario e secondario del trasformatore. L'efficienza massima raggiunta è
+	pari al 29,4\%.
 
+\item La seconda impiega gli stessi valori dei componenti del trasformatore,
+	questa vola applicati all'oscillatore di Tipo 2. In questa simulazione ci
+	si è concentrato sul dimensionamento degli invertitori e l'efficienza
+	massima raggiunta è pari al 28,1\%.
+
+\item L'ultima mira a confrontare qualitativamente il comportamento in caso di
+	funzionamento impulsato, confrontando i tempi di accensione e spegnimento
+	dei due oscillatori.
+\end{itemize}
+Segue una disamina dettagliata del lavoro svolto.
+
+%% TIPO 1
+\section{Tipo 1}
+In Figura 3.1 si può osservare l'efficienza totale del circuito simulato al
+calcolatore per diversi valori dell'induttanza $L_1$ e $L_2$. Sono inoltre
+presenti delle rette che rappresentano diversi valori per il rapporto di
+trasformazione.
+\begin{figure}[h!]
+\centering
+\includegraphics[width=\textwidth]{efficienza.pdf}
+\caption{}
+\end{figure}
+
+Si è notato un generale aumento di efficienza per $L_2$ crescente.\\
+Come si evince dal modello teorico ciò è dovuto alla maggiore corrente che 
+scorre nella resistenza di antenna piuttosto che in quella parassita.\\
+Si ha inoltre un aumento dell'efficienza al diminuire di $L_1$, finché non è
+raggiunto il valore di $70pH$, oltre al quale l'efficienza inizia a diminuire.
+\\Questo comportamento è in accordo con il modello teorico, il quale prevede
+che l'efficienza aumenti per $L_1$ grande.  Tuttavia all'aumentare 
+dell'induttanza al primario aumenta la corrente che circola nei MOSFET e con
+essa aumenta quella assorbita dal circuito.\\
+Questo fenomeno, oltre a degradare l'efficienza impone un carico eccessivo sui
+transistor che non sono più in grado di pilotare adeguatamente il trasformatore.
+Le simulazioni hanno evidenziato come valori di $L_1$ pari o superiori a $200pH$
+sono troppo elevati e producono, oltre che una scarsa efficienza, un'onda
+sinusoidale piuttosto distorta all'antenna.\\
+Si ha perciò che il valore ottimale per $L_1$ è pari a $70pH$.
+\begin{figure}[h!]
+\centering
+\includegraphics[width=\textwidth]{images/Vant-It.pdf}
+\caption{Tensione all'antenna e corrente assorbita per l'oscillatore di Tipo 1
+      con dimensioni ottimali per il trasformatore.}
+\end{figure}
+\clearpage
+
+Il valore iniziale per il rapporto di trasformazione era $n_{iniziale}=1,155$
+il quale porge un'efficienza pari al 10\% (valore indicato dalla freccia in
+figura).\\
+Portando il rapporto di trasformazione a $n_{ottimo}=0,42$ e impostando
+$L_1=70pH$ e $L_2=400pH$ si è raggiunta la migliore figura di efficienza, pari
+al $29,4\%$.\\
+
+%% TIPO 2
+\section{Tipo 2}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Conclusione e sviluppi futuri
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%
