@@ -1,18 +1,20 @@
 # plot efficienza.dat
 #
 clear
-set xlabel 'L1'
-set ylabel 'L2'
-set xr [60:260]
-set yr [100:500]
-set xtics (70, 75, 100, 150, 175, 200, 250)
-set ytics (150, 200, 300, 400, 450)
-set label 'Iniziale' at 225,125
-set arrow from 223,125 to 203,148
-plot "graphs/efficienza.dat" with labels offset 1,1 notitle, \
+set xlabel 'L2'
+set ylabel 'L1'
+set yr [65:270]
+set xr [125:480]
+set ytics (70, 75, 100, 150, 175, 200, 250)
+set xtics (150, 200, 300, 400, 450)
+set label 'Iniziale' at 150,210
+set arrow from 160,209 to 151,201.5
+plot "graphs/efficienza.dat" with labels offset 3,0 notitle, \
 	"graphs/efficienza.dat" title 'eff. reale' pt 7 , \
-	x with lines title 'n=1'
-set term postscript 8
+	0.5*x with lines title 'n^2=0.5', \
+	x with lines title 'n^2=1', \
+	1.5*x with lines title 'n^2=1.5'
+set term postscript portrait 10 enhanced
 set output "efficienza.ps"
 replot
 set term x11
