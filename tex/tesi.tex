@@ -550,9 +550,9 @@ Segue una disamina dettagliata del lavoro svolto.
 %% TIPO 1
 \section{Tipo 1}
 In Figura 3.1 si può osservare l'efficienza totale del circuito simulato al
-calcolatore per diversi valori dell'induttanza $L_1$ e $L_2$. Sono inoltre
-presenti delle rette che rappresentano diversi valori per il rapporto di
-trasformazione.
+calcolatore in regime transitorio per diversi valori dell'induttanza $L_1$ e
+$L_2$. Sono inoltre presenti delle rette che rappresentano diversi valori per 
+il rapporto di trasformazione.
 \begin{figure}[h!]
 \centering
 \includegraphics[width=\textwidth]{efficienza.pdf}
@@ -584,7 +584,6 @@ Si ha perciò che il valore ottimale per $L_1$ è pari a $70pH$.
 \caption{Tensione all'antenna e corrente assorbita per l'oscillatore di Tipo 1
       con dimensioni ottimali per il trasformatore.}
 \end{figure}
-\clearpage
 
 Il valore iniziale per il rapporto di trasformazione era $n_{iniziale}=1,155$
 il quale porge un'efficienza pari al 10\% (valore indicato dalla freccia in
@@ -596,15 +595,22 @@ al 29.4\%.
 Al fine di confermare i risultati si è simulato il solo trasformatore,
 escludendo il contributo dei componenti attivi: i due NMOS dell'oscillatore
 sono stati sostituiti da un generatore di tensione sinusoidale e un generatore
-di tensione controllato in tensione con guadagno pari a $-1$.
-\begin{figure}[h]
+di tensione controllato in tensione con guadagno pari a $-1$.\\
+Tramite un'analisi in DC si è inoltre determinato il contributo capacitivo
+degli NMOS che è rappresentato da $C_p$. La simulazione ha evidenziato un
+valore per tale capacità pari a $265fF$.\\
+Il valore di C è stato infine determinato dall'analisi al calcolatore in regime
+sinusoidale, in modo da garantire la risonanza con l'induttanza complessiva del
+circuito.
+\begin{figure}[h!]
 \centering
-
+\includegraphics[width=0.6\textwidth]{images/trasf_sim.pdf}
 \caption{Schema elettrico per la simulazione del solo trasformatore}
 \end{figure}
 
-\noindent La simulazione del circuito presentato ha confermato (a meno di un
-errore dell'$1,1\%$) i risultati sopra elencati.
+\noindent Il circuito (presentato in Figura 3.3) simulato in regime
+transitorio ha confermato i risultati sopraelencati a meno di un errore 
+dell'$1,1\%$.
 
 %% TIPO 2
 \section{Tipo 2}
