@@ -526,24 +526,27 @@ dell'invertitore una dimensione di poco più grande rispetto a quella dei
 % Risultati numerici
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \chapter{Risultati numerici}
-Sono state effettuate tre tipologie di simulazioni distinte:
+Per analizzare i diversi circuiti sono state effettuate tre distinte tipologie
+di simulazioni:
 \begin{itemize}
-\item La prima parte dall'oscillatore di Tipo 1 con gli stessi parametri
-	circuitali in \cite{Neviani14}, adattati al modello di trasformatore 
-	utilizzato. Questa rappresenta il punto di partenza e porge un'efficienza
-	in trasmissione pari al 10\%. A partire da questo valore si è fatto
-	variare il rapporto di trasformazione e il valore delle induttanze al
-	primario e secondario del trasformatore. L'efficienza massima raggiunta è
-	pari al 29,4\%.
+\item Nella prima simulazione il punto di partenza è definito dall'oscillatore
+	di Tipo 1 dimensionato come in \cite{Neviani14}, avendo adattato i
+	parametri al modello di trasformatore utilizzato. Questo garantisce
+	un'efficienza in trasmissione pari al 10\%.\\
+	A partire da questo valore si è fatto variare il rapporto di
+	trasformazione e il valore delle induttanze al primario e secondario del
+	trasformatore. L'efficienza massima raggiunta è pari al 29,4\%.
 
-\item La seconda impiega gli stessi valori dei componenti del trasformatore,
-	questa vola applicati all'oscillatore di Tipo 2. In questa simulazione ci
-	si è concentrato sul dimensionamento degli invertitori e l'efficienza
-	massima raggiunta è pari al 28,1\%.
+\item La seconda simulazione impiega gli stessi valori dei componenti del
+	trasformatore che garantiscono la massima efficienza al Tipo 1, applicati
+	questa volta all'oscillatore di Tipo 2.\\
+	In questa simulazione ci si è concentrati particolarmente sul
+	dimensionamento degli invertitori e l'efficienza massima raggiunta è pari
+	al 28,1\%.
 
-\item L'ultima mira a confrontare qualitativamente il comportamento in caso di
-	funzionamento impulsato, confrontando i tempi di accensione e spegnimento
-	dei due oscillatori.
+\item L'ultima simulazione mira a confrontare qualitativamente il comportamento
+	in caso di funzionamento impulsato, confrontando i tempi di accensione e
+	spegnimento dei due oscillatori.
 \end{itemize}
 Segue una disamina dettagliata del lavoro svolto.
 
@@ -553,6 +556,7 @@ In Figura 3.1 si può osservare l'efficienza totale del circuito simulato al
 calcolatore in regime transitorio per diversi valori dell'induttanza $L_1$ e
 $L_2$. Sono inoltre presenti delle rette che rappresentano diversi valori per 
 il rapporto di trasformazione.
+
 \begin{figure}[h!]
 \centering
 \includegraphics[width=\textwidth]{efficienza.pdf}
@@ -560,62 +564,169 @@ il rapporto di trasformazione.
 \end{figure}
 
 Si è notato un generale aumento di efficienza per $L_2$ crescente, fino ad un
-massimo per $L_2 \approx 400pH$, oltre il quale l' efficienza inizia a
-dimunuire.\\
-Come si evince dal modello teorico ciò è dovuto alla maggiore potenza erogata
+massimo per $L_2 \approx 400pH$, oltre il quale l'efficienza inizia a
+diminuire.\\
+Come si evince dal modello teorico, ciò è dovuto alla maggiore potenza erogata
 all'antenna a causa del ridotto rapporto di trasformazione. Oltre il valore
 massimo invece dominano gli effetti descritti nel modello teorico.
 
 Si ha inoltre un aumento dell'efficienza al diminuire di $L_1$, finché non è
-raggiunto il valore di $70pH$, oltre al quale l'efficienza inizia a diminuire.
+raggiunto il valore di $70pH$, oltre il quale l'efficienza inizia a diminuire.
 \\Questo comportamento è in accordo con il modello teorico, il quale prevede
-che l'efficienza aumenti per $L_1$ piccola.  Tuttavia al dimunuire 
+che l'efficienza aumenti per $L_1$ piccola. Tuttavia al diminuire 
 dell'induttanza al primario diminuisce il rapporto di trasformazione e aumenta
 la corrente che circola nei MOSFET e dunque quella assorbita dal circuito.\\
-Questo fenomeno, oltre a degradare l'efficienza impone un carico eccessivo sui
+Questo fenomeno, oltre a degradare l'efficienza, impone un carico eccessivo sui
 transistor che non sono più in grado di pilotare adeguatamente il trasformatore.
 Le simulazioni hanno evidenziato come valori di $L_1$ pari o superiori a $200pH$
-sono troppo elevati e producono, oltre che una scarsa efficienza, un'onda
+siano troppo elevati e producono, oltre che una scarsa efficienza, un'onda
 sinusoidale piuttosto distorta all'antenna.\\
 Si ha perciò che il valore ottimale per $L_1$ è pari a $70pH$.
-\begin{figure}[h!]
-\centering
-\includegraphics[width=\textwidth]{images/Vant-It.pdf}
-\caption{Tensione all'antenna e corrente assorbita per l'oscillatore di Tipo 1
-      con dimensioni ottimali per il trasformatore.}
-\end{figure}
 
 Il valore iniziale per il rapporto di trasformazione era $n_{iniziale}=1,155$
 il quale porge un'efficienza pari al 10\% (valore indicato dalla freccia in
-figura).\\
+Figura 3.1).\\
 Portando il rapporto di trasformazione a $n_{ottimo}=0,42$ e impostando
 $L_1=70pH$ e $L_2=400pH$ si è raggiunta la migliore figura di efficienza, pari
 al 29.4\%.
 
+\begin{figure}[h!]
+\centering
+\includegraphics[width=\textwidth]{images/Vant-It.pdf} 
+\caption{Tensione all'antenna e corrente assorbita per l'oscillatore di Tipo 1
+      con dimensioni ottimali per il trasformatore.}
+\end{figure}
+
 Al fine di confermare i risultati si è simulato il solo trasformatore,
 escludendo il contributo dei componenti attivi: i due NMOS dell'oscillatore
 sono stati sostituiti da un generatore di tensione sinusoidale e un generatore
-di tensione controllato in tensione con guadagno pari a $-1$.\\
+di tensione controllato in tensione con guadagno pari a $-1$.
+
+\begin{figure}[h!]
+\centering
+\includegraphics[height=0.34\textheight]{images/trasf_sim.pdf}
+\caption{Schema elettrico per la simulazione del solo trasformatore}
+\end{figure}
+\clearpage
+
 Tramite un'analisi in DC si è inoltre determinato il contributo capacitivo
 degli NMOS che è rappresentato da $C_p$. La simulazione ha evidenziato un
 valore per tale capacità pari a $265fF$.\\
 Il valore di C è stato infine determinato dall'analisi al calcolatore in regime
 sinusoidale, in modo da garantire la risonanza con l'induttanza complessiva del
 circuito.
-\begin{figure}[h!]
-\centering
-\includegraphics[width=0.6\textwidth]{images/trasf_sim.pdf}
-\caption{Schema elettrico per la simulazione del solo trasformatore}
-\end{figure}
 
-\noindent Il circuito (presentato in Figura 3.3) simulato in regime
-transitorio ha confermato i risultati sopraelencati a meno di un errore 
-dell'$1,1\%$.
+Tale circuito (presentato in Figura 3.3), simulato in regime transitorio, ha
+confermato i risultati sopraelencati a meno di un errore dell'$1,1\%$.
 
 %% TIPO 2
 \section{Tipo 2}
 Una volta determinati i parametri migliori per il trasformatore e per 
 l'oscillatore di Tipo 1 si è passati alla simulazione e all'analisi del Tipo 2.
+
+Il dimensionamento del trasformatore è quello che è stato determinato come
+ottimale nella sezione precedente.\\
+Per gli invertitori i PMOS sono stati scelti di dimensione minima mentre gli
+NMOS hanno una larghezza pari a $280 \mu m$ (confrontabile con quella degli
+NMOS dell'oscillatore che è pari a $224 \mu m$).\\
+In queste condizioni l'efficienza in trasmissione emersa dalla simulazione in
+regime transitorio è pari al $28.1\%$.
+
+Dal modello teorico ci si aspetta che l'efficienza migliori all'aumentare della
+resistenza equivalente degli invertitori quando sono attivi i soli PMOS.\\
+L'analisi del punto operativo in corrente continua ha mostrato una resistenza 
+per i PMOS, avendo posto a massa l'ingresso degli invertitori, pari a
+$56,4 K\Omega$.\\
+Simulazioni successive in regime transitorio hanno evidenziato come 
+un'ulteriore riduzione del fattore di forma $Z_p=\frac{W_p}{L_p}$ di tali
+transistor non apporti benefici sensibili all'efficienza in trasmissione del
+circuito.\\
+Alla luce dei risultati ottenuti si è preferito impiegare PMOS di dimensione
+minima per ridurre l'area occupata dal circuito e il consumo dinamico di 
+potenza durante il funzionamento impulsato.
+
+\`E necessario notare come la differenza tra l'efficienza dell'oscillatore di
+Tipo 2 e di Tipo 1 sia di poco superiore all'$1\%$ e dunque, a causa delle
+semplificazioni introdotte dal modello, le due soluzioni circuitali sono di
+fatto equivalenti per quanto riguarda la massima efficienza raggiungibile.
+
+Rispetto al Tipo 1, l'oscillatore di Tipo 2 dimensionato come sopra esposto si
+presenta migliore dal punto di vista dell'area occupata.\\
+Il Tipo 1 infatti impiega per la sua accensione e il suo spegnimento tre NMOS
+con $W = 260 \mu m$ in parallelo. Per contro il Tipo 2 impiega due soli NMOS
+con $W = 280 \mu m$ e due PMOS di dimensioni minime.\\
+Una minore area riduce le capacità parassite dei componenti attivi e poiché il
+consumo dinamico di potenza è dato dalla relazione :
+$P_{din} = C_L V_{DD}^2 f_{0 \rightarrow 1}$ \@\cite[p. 230]{RazaviED}, si ha
+che una minore capacità riduce la potenza dissipata per accendere e spegnere
+l'oscillatore.
+
+\section{Funzionamento impulsato}
+Come affermato in \cite{Neviani14} l'inviluppo risultante dal funzionamento
+impulsato apporta anch'esso un contributo all'efficienza.\\
+L'analisi quantitativa non è stata considerata al fine dello sviluppo della
+presente tesi. Si propongono delle analisi qualitative e degli spunti per
+possibili ulteriori ricerche.
+
+In Figura 3.4 è possibile notare il comportamento in regime transitorio
+dell'oscillatore di Tipo 1 con il dimensionamento ottimale dei componenti.\\
+Si noti come al primo impulso l'oscillazione si attivi quasi nel medesimo
+istante in cui si presenta il fronte di salita del segnale di controllo. Ciò è
+dovuto alle condizioni iniziali impostate nel momento della simulazione ed è
+dunque da trascurare. 
+\begin{figure}[h]
+\centering
+\includegraphics[width=\textheight, angle=90]{images/tipo1-impulsato.pdf}
+\caption{Oscillatore di Tipo 1 in funzionamento impulsato}
+\end{figure}
+
+Dalla figura è possibile notare come l'accensione non avvenga istantaneamente
+ma con un ritardo di circa $2,5ns$. Dopodiché la tensione all'antenna cresce
+rapidamente.\\
+Anche lo spegnimento avviene quasi immediatamente ma presenta un ritardo 
+maggiore rispetto al tempo di accensione che si attesta attorno ai $5ns$. 
+
+Il dimensionamento del MOSFET che accende e spegne l'oscillatore influenza
+marginalmente l'inviluppo e maggiormente il ritardo all'accensione.\\
+Non si è osservato invece alcun effetto sul tempo di spegnimento da parte di
+variazioni nel fattore di forma di tale transistor.\\
+Al diminuire del fattore di forma dell'NMOS, oltre a calare l'efficienza, si
+osserva un aumento del tempo di ritardo e una transizione più ``morbida''
+all'accensione. Viceversa, se il fattore di forma aumenta, la transizione si fa
+più ``ripida'' ma il ritardo aumenta leggermente, probabilmente a causa di una
+maggiore capacità parassita.
+
+In Figura 3.4 è rappresentato il risultato della simulazione in regime
+transitorio dell'oscillatore di Tipo 2 durante il funzionamento impulsato.\\
+Anche in questo caso il primo impulso è da trascurarsi a causa delle condizioni
+iniziali.
+\begin{figure}[h]
+\centering
+\includegraphics[width=\textheight, angle=90]{images/tipo2-impulsato.pdf}
+\caption{Oscillatore di Tipo 2 in funzionamento impulsato}
+\end{figure}
+
+La simulazione ha evidenziato come, con il dimensionamento ottimale discusso
+nella sezione precedente, il tempo di risposta al fronte di salita e discesa
+sia più rapido rispetto al Tipo 1. Il tempo impiegato dall'oscillatore per
+raggiungere la massima tensione all'antenna e spegnersi completamente risulta
+migliore per il Tipo 2 rispetto al Tipo 1.
+
+Il dimensionamento dei MOSFET che compongono gli invertitori influenza in modo
+determinante l'inviluppo della forma d' onda.\\
+Gli NMOS la cui larghezza è inferiore ai $280 \mu m$ (la lunghezza del canale è
+quella minima di $120nm$) non riescono a fermare adeguatamente le oscillazioni.
+\\Una larghezza superiore a tale valore invece migliora ulteriormente la
+risposta al fronte di salita, a scapito dell'area occupata dal circuito
+integrato.\\
+Per quanto concerne i PMOS invece, vista la loro elevata resistenza
+equivalente, la loro influenza è marginare e all'aumentare della lunghezza di
+canale gli effetti sulla risposta all'impulso sono trascurabili.
+
+La possibilità di esplorare la soluzione che raggiunga il migliore compromesso
+tra area occupata dal circuito integrato ed efficienza della trasmissione,
+tenendo conto degli effetti delle diverse soluzioni sulla forma d'onda in
+funzionamento impulsato, possono essere oggetto di ulteriori ricerche.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Conclusione e sviluppi futuri
