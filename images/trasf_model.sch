@@ -40,14 +40,14 @@ C 33000 15000 1 0 0 resistor-1.sym
 T 33300 15400 5 10 0 0 0 0 1
 device=RESISTOR
 T 33200 15300 5 10 1 1 0 0 1
-refdes=Rp/2
+refdes=Rs/2
 }
 C 33000 13200 1 0 0 resistor-1.sym
 {
 T 33300 13600 5 10 0 0 0 0 1
 device=RESISTOR
 T 33200 13500 5 10 1 1 0 0 1
-refdes=Rp/2
+refdes=Rs/2
 }
 L 33900 14500 33800 14500 3 0 0 0 -1 -1
 L 33900 14500 33900 14400 3 0 0 0 -1 -1

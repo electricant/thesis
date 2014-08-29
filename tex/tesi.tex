@@ -296,7 +296,7 @@ primario divisa a metà tra i due rami. Tale resistenza è calcolata di volta in
 volta, a partire dal valore di induttanza al primario, in modo da mantenere il
 fattore di qualità Q a 25 per una frequenza di 8GHz.\\
 La formula che lega il fattore di qualità al valore di $L_1$ è:
-$ Q = 2\pi f_{osc} \frac{L_1}{R_p} $,\\
+$ Q = 2\pi f_{osc} \frac{L_1}{R_s} $,\\
 dove $R_p$ è la resistenza parassita al primario e $ f_{osc}=8GHz $.
 \begin{figure}[h]
 \centering
@@ -346,40 +346,48 @@ ideale di tensione sinusoidale di ampiezza $2V_{DD}$, connesso alla serie tra
 una resistenza e il primario di un trasformatore. Il secondario è connesso
 direttamente alla resistenza di antenna (Figura 2.5).
 
-Al circuito così ottenuto si possono applicare le relazioni che permettono di
-passare dal doppio bipolo induttivo al trasformatore ideale con induttanza in
-eccedenza\cite[pp. 322-323]{GuarnieriET}. Sfruttando poi le proprietà del
-trasformatore ideale si ottiene la Figura 2.6,
+Se $ Q = \frac{\omega_0 L_1}{R_s} \gg 1 $ il circuito può essere trasformato
+come segue, avendo posto $n=\sqrt{\frac{L_1}{L_2}}$.
 \begin{figure}[h!]
-\includegraphics[height=0.125\textheight]{images/cir_model1.pdf}
+\includegraphics[height=0.2\textheight]{images/cir_model1.pdf}
 \centering
 \caption{}
 \end{figure}
+
+Applicando poi le trasformazioni serie-parallelo\cite[pp. 63-64]{RazaviRF}
+alla serie di $R_s$ e $L_1$ e tenendo conto del trasferimento di impedenza
+attuato dal trasformatore\cite[pp. 322-323]{GuarnieriET} si ottiene il circuito
+di Figura 2.7, 
+\begin{figure}[h!]
+\includegraphics[height=0.13\textheight]{images/cir_model2.pdf}
+\centering
+\caption{}
+\end{figure}
+
 \noindent in cui le espressioni dei valori dei componenti sono:
 \begin{description}
-\item $ R_p = 2 \pi f_{osc} \frac{L_1}{Q} $
-\item $ L_{1p} = k^2 L_1 $
-\item $ L_{1e} = \left( 1 - k^2 \right) L_1 $
-\item $ n' = \sqrt{\frac{L_{1p}}{L_2}} = k \sqrt{\frac{L_1}{L_2}} = kn $
-\item $ R_a' = {\left( nk \right)}^2 R_a $
+\item $ R_p = R_s \left( 1+Q^2 \right) $
+\item $ L_1' = L_1 \left( 1+\frac{1}{Q^2} \right) $
+\item $ L_{2e}' = {\left( nK \right)}^2 L_{2e} $
+\item $ R_{ant}' = {\left( nK \right)}^2 R_{ant} $
 \end{description}
 
-Si applicano infine le trasformazioni serie-parallelo\cite[pp. 63-64]{RazaviRF}
-al parallelo di  $R_a' $ e $L_{1p}$. Sapendo inoltre che per l'ipotesi 4. 
-la capacità e le induttanze sono in risonanza, il circuito che si determina è
-rappresentato in Figura 2.7. 
+Si applicano infine le trasformazioni serie-parallelo alla serie di  $R_{ant}'$
+e $L_{2e}'$. Il circuito che si determina è rappresentato in Figura 2.7. 
 \begin{figure}[h!]
 \centering
-\includegraphics[height=0.125\textheight]{images/cir_model2.pdf}
+\includegraphics[height=0.1\textheight]{images/cir_model3.pdf}
 \caption{}
 \end{figure}
 
-\noindent Si è ottenuto un partitore di tensione.\\
-Il  valore di $ R_a'' $ è: $ R_a'' = R_p \frac{\left(nk\right)^2}{1 + Q^2} $.\\
+\noindent Tenendo conto che la capacità $C$ è in risonanza con le induttanze
+del circuito si ottiene un partitore di corrente.\\
+Il  valore di $ R_{ant}'' $ è: $ R_{ant}'' = R_{ant}' \left(1 + Q^2 \right) $.\\
 L'efficienza è dunque:
-$ \eta_t = \frac{P_{ant}}{P_{tot}} = \frac{R_a''}{R_a'' + R_p} $
+$ \eta_t = \frac{P_{ant}}{P_{tot}} = \frac{R_p}{R_a'' + R_p} $
 \\Sostituendo ad $R_a''$ ed $R_p$ le rispettive espressioni si ottiene:
-$$ \eta_t = \frac{k^2R_a}{k^2R_a + 2\pi f_{osc}L_2(\frac{1}{Q} + Q)} $$
+$$ \eta_t = \frac{2\pi f_{osc} K^2 \frac{L_2}{Q}}{2\pi f_{osc} K^2
+\frac{L_2}{Q} + R_{ant}} $$
 
 Dalla precedente formula si evince come, in prima approssimazione, l'efficienza
 teorica sia solo funzione del fattore di qualità Q, del fattore di 
@@ -387,8 +395,8 @@ accoppiamento K e dell'induttanza al secondario $L_2$.\\
 L'unico di questi parametri che sia accessibile in fase di progetto è il
 valore di $L_2$ in quanto  gli altri sono determinati dal \emph{layout} del
 trasformatore.\\
-L'efficienza teorica tende ad uno per $L_2$ che tende a 0. Il valore
-di $L_2$ deve dunque essere il più piccolo possibile.
+L'efficienza teorica tende ad uno per $L_2$ che tende all'infinito. Il valore
+di $L_2$ deve dunque essere il più grande possibile.
 
 Una volta isolato il contributo del trasformatore è possibile dedicarsi 
 all'effetto introdotto dai componenti attivi nel circuito.\\
@@ -418,6 +426,7 @@ massima efficienza teoricamente raggiungibile.
 influenza il valore dell'efficienza.}
 \end{figure}
 
+\clearpage
 %%% PARAMETRI DI INTERESSE
 \section{Parametri di interesse}
 Nella presente sezione si analizzano e discutono i componenti il cui valore ha
@@ -432,42 +441,39 @@ Con riferimento alle figure 2.1, 2.4 e 2.7 si individuano:
 \item[L1], ovvero l'induttanza al primario. Da essa dipende direttamente il
 	valore della resistenza parassita vista ai terminali \texttt{TRASF\_1} e
 	\texttt{TRASF\_2}.\\
-	Come precedentemente discusso, la resistenza parassita di $L_1$
-	si trova in serie all'antenna.\\
-	Dal momento che la tensione ai capi del generatore si divide tra la
-	resistenza parassita e l'antenna, è necessario che il valore di $R_p$
-	sia molto minore rispetto a $R_a''$.\\
+	Come precedentemente discusso, la resistenza parassita di $L_1$ si trova
+	in parallelo all'antenna.\\
+	Dal momento che la corrente ai capi del generatore si divide tra la
+	resistenza parassita e l'antenna, è necessario che il valore di $R_p$ sia
+	molto maggiore rispetto a $R_a''$.\\
 	Dall'analisi effettuata nella sezione precedente si desidera $L_2$ 
-	piccola, il che porta $n'$ ad essere grande e dunque $R_a' = n'R_a$ avrà
-	un valore dell'ordine di grandezza della decina di ohm.\\
+	grande, il che porta $n$ ad essere piccolo e dunque $R_a' = {(nK)}^2R_a$
+	avrà un valore dell'ordine di grandezza dell'ohm.\\
 	Essendo $R_p = 2\pi f_{osc} L_1 \left(\frac{1}{Q} + Q \right)$, $L1$ deve
-	essere sufficientemente piccola da rendere $R_p \ll R_a''$.\\
-	Un valore troppo piccolo di $L_1$ tuttavia degrada il rapporto di
-	trasformazione, da cui dipende direttamente l'efficienza, ed è
-	difficile da realizzare in tecnologia CMOS.\\
-	$L_1$ troppo grande invece aumenta la corrente che scorre nel primario e
-	dunque nei MOSFET del circuito. Se questi ultimi non sono in grado di
-	sopportare tali correnti la caduta di potenziale su di essi si fa 
-	rilevante causando una drastica perdita di efficienza e il passaggio da
-	regime limitato in tensione a regime limitato in corrente.
+	essere sufficientemente grande da rendere $R_p \gg R_a''$.\\
+	Un valore troppo grande di $L_1$ tuttavia aumenta la corrente che scorre
+	nel primario e dunque nei MOSFET del circuito. Se questi ultimi non sono
+	in grado di sopportare tali correnti la caduta di potenziale su di essi
+	si fa rilevante causando una drastica perdita di efficienza e il
+	passaggio da regime limitato in tensione a regime limitato in corrente.
 
 \item[L2], ovvero l'induttanza al secondario. Da essa dipende il rapporto di
 	trasformazione e l'efficienza complessiva del trasformatore.\\
-	Per la sua induttanza il modello teorico richiede un valore piccolo, al
-	limite nullo.\\
-	Nel processo CMOS induttanze troppo piccole sono difficili da realizzare
-	poiché diventano preponderanti gli effetti degli
-	accoppiamenti induttivi e capacitivi e l'induttanza parassita delle piste
-	stesse\cite{RazaviRF}.\\
+	Per la sua induttanza il modello teorico richiede un valore grande, al
+	limite infinito.\\
+	Nel processo CMOS i parametri parassiti delle induttanze aumentano con
+	l'aumento del valore dell'induttanza stessa\cite{RazaviRF}.\\
+	Questo causa una degradazione del fattore di qualità e dunque aumenta la
+	potenza dissipata al secondario.\\
+	All'aumentare di $L_2$ diminuisce inoltre il rapporto di trasformazione e
+      la resistenza che deve essere pilotata dagli NMOS.\@ Analogamente a
+      quanto affermato per $L_1$ una corrente troppo elevata che scorre nei
+      componenti attivi va a detrimento dell'efficienza.\\
 	Al diminuire di $L_2$ aumenta il rapporto di trasformazione e con esso la
 	resistenza d'antenna vista dai MOSFET.\@ Dato che la potenza all'antenna è
 	$P_{ant}= \frac{4V_{dd}^2}{(nk)^2R_a}$, avere n troppo elevato riduce la
 	potenza totale erogata e rende dominanti le dispersioni interne al
-	circuito.\\
-	All'aumentare di $L_2$ diminuisce invece il rapporto di trasformazione e
-	la resistenza che deve essere pilotata dagli NMOS.\@ Analogamente a
-	quanto affermato per $L_1$ una corrente troppo elevata che scorre nei
-	componenti attivi va a detrimento dell'efficienza.
+	circuito.
 
 \item[C], ovvero la capacità del \emph{tank}. Da essa e dall'induttanza
 	complessiva dipendono la frequenza di oscillazione e il
@@ -568,16 +574,17 @@ massimo per $L_2 \approx 400pH$, oltre il quale l'efficienza inizia a
 diminuire.\\
 Come si evince dal modello teorico, ciò è dovuto alla maggiore potenza erogata
 all'antenna a causa del ridotto rapporto di trasformazione. Oltre il valore
-massimo invece dominano gli effetti descritti nel modello teorico.
+massimo invece il carico imposto dalla resistenza di antenna, vista attraverso
+il trasformatore, è eccessivo.
 
 Si ha inoltre un aumento dell'efficienza al diminuire di $L_1$, finché non è
 raggiunto il valore di $70pH$, oltre il quale l'efficienza inizia a diminuire.
-\\Questo comportamento è in accordo con il modello teorico, il quale prevede
-che l'efficienza aumenti per $L_1$ piccola. Tuttavia al diminuire 
-dell'induttanza al primario diminuisce il rapporto di trasformazione e aumenta
-la corrente che circola nei MOSFET e dunque quella assorbita dal circuito.\\
-Questo fenomeno, oltre a degradare l'efficienza, impone un carico eccessivo sui
-transistor che non sono più in grado di pilotare adeguatamente il trasformatore.
+\\Questo comportamento è in accordo con il modello teorico. Se $L_1$ è
+troppo grande i MOSFET non riescono a fornire sufficiente corrente per
+pilotare l'induttanza del primario. Tuttavia al diminuire dell'induttanza al
+primario diminuisce anche la resistenza parassita in parallelo all'antenna e
+dunque la corrente che circola in quest'ultima si riduce, facendo calare
+l'efficienza.\\
 Le simulazioni hanno evidenziato come valori di $L_1$ pari o superiori a $200pH$
 siano troppo elevati e producono, oltre che una scarsa efficienza, un'onda
 sinusoidale piuttosto distorta all'antenna.\\
