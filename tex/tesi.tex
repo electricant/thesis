@@ -738,10 +738,56 @@ funzionamento impulsato, possono essere oggetto di ulteriori ricerche.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Conclusione e sviluppi futuri
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\cleardoublepage{}
 \chapter{Conclusione}
+In questa tesi si sono analizzati due oscillatori LC \emph{cross-coupled} per
+impulsatori Ultra-Wideband. Le analisi effettuate prevedono sia lo studio di un
+modello teorico sia la simulazione al calcolatore dei circuiti.\\
+L'obiettivo finale è stato quello di fornire la soluzione circuitale che
+massimizza l'efficienza energetica in trasmissione, espressa come il rapporto
+tra la potenza erogata all'antenna e quella totale dissipata dal circuito.
+
+L'elaborazione di un modello teorico ha svolto la funzione di guidare la
+simulazione al calcolatore nella determinazione dei parametri che più
+influenzano l'efficienza energetica e il possibile effetto di loro variazioni.\\
+Una volta elaborato il modello sono stati simulati entrambi i circuiti variando
+i parametri dei componenti fino ad ottenere la massima efficienza.
+
+Partendo, con i parametri circuitali illustrati in\cite{Neviani14}, da 
+un'efficienza simulata pari al $10\%$ si è giunti ad un'efficienza massima del
+$29,4\%$.\\
+A partire da quest'efficienza si sono confrontati, sotto gli stessi valori dei
+componenti del circuito, le due diverse tipologie di oscillatore.\\
+\`E emerso che a causa degli errori introdotti dalle due simulazioni i circuiti
+sono do fatto equivalenti dal punto di vista dell'efficienza in trasmissione
+($29,4\%$ per il Tipo 1 e $28,1\%$ per il Tipo 2). La scelta tra le due
+soluzioni circuitali deve tenere conto di altri fattori tra cui il consumo
+dinamico di potenza e l'area occupata sul circuito integrato.
 
 \section{Sviluppi futuri}
+L'analisi del layout e dell'efficienza durante il funzionamento impulsato è
+stata limitata alla necessità dello sviluppo della trattazione oggetto della
+presente tesi.\\
+Come è stato messo in luce in particolare nel terzo capitolo gli oscillatori di
+Tipo 1 e Tipo 2 sono di fatto equivalenti dal punto di vista dell'efficienza in
+trasmissione.\\
+I circuiti si differenziano per ulteriori fattori e in particolare per l'area
+occupata.
+
+Una minore area, oltre a tradursi in una maggiore economia al momento della
+realizzazione, riduce le capacità parassite dei componenti deputati
+all'accensione e lo spegnimento del circuito.\\
+Queste capacità parassite minori si traducono in una minore energia dissipata
+dalla circuiteria di controllo per pilotare l'oscillatore e rendono l'inviluppo
+della forma d'onda all'antenna più simile ad un'onda quadra, migliorando
+l'efficienza globale della radio a impulsi.\\
+Lo studio di quanto sopra elencato viene a concludere il quadro in esame.
+
+Il modello del trasformatore utilizzato nelle simulazioni al calcolatore è solo
+approssimato e non tiene conto di fattori quali l'accoppiamento induttivo e
+capacitivo con il substrato e le piste adiacenti.\\
+L'impiego di un modello che includa anche tali fattori può garantire una
+migliore accuratezza nei risultati della simulazione e dunque consente di
+affinare il dimensionamento presentato in questa tesi.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Bibliografia
