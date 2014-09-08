@@ -29,8 +29,8 @@ efficienza.pdf: graphs/efficienza.dat graphs/eff_plot
 	@gnuplot graphs/eff_plot
 	@ps2pdf efficienza.ps
 	
-clean:
-	@rm -f *.pdf *.out *.aux *.log *.toc *.bbl *.blg *.ps
+clean: soft-clean
+	@rm -f *.pdf
 
 soft-clean:
-	@rm -f *.out *.aux *.log *toc *.bbl *.blg *.ps
+	@rm -f *.out *.aux *.log *toc *.bbl *.blg *.ps *.nav *.snm
