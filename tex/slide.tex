@@ -6,6 +6,8 @@
 %
 \documentclass{beamer}
 \usetheme{Padova}
+% Include the following packages:
+\usepackage{mathtools}
 
 \title{Studio dell'efficienza di oscillatori LC integrati per impulsatori
 	Ultra-Wideband}
@@ -39,42 +41,153 @@
 %% UWB-IR description & application
 \begin{frame}
 \frametitle{La radio a impulsi UWB}
-
+\begin{itemize}
+	\item Impieghi:
+	\begin{itemize}
+		\item Trasmissione a corto raggio
+		\item Localizzazione di precisione
+	\end{itemize}
+	\vfill
+	\item Facilmente integrabile in tecnologia CMOS
+	\vfill
+	\item Pu\`o operare tramite \emph{energy harvesting}
+	\vfill
+\end{itemize}
 \end{frame}
 %
 %% LC cross-coupled oscillator topology
 \begin{frame}
 \frametitle{L'oscillatore LC \emph{cross-coupled}}
-
+\begin{columns}
+	\column[t]{0.5\textwidth}
+	\begin{flushleft}
+      \begin{figure}
+      \includegraphics[width=\textwidth]{images/LCosc.pdf}
+      \end{figure}
+	\end{flushleft}
+	
+	\column[t]{0.5\textwidth}
+	\begin{itemize}
+		\item Basso numero di componenti attivi
+		\bigskip
+		\item Rumore di fase inferiore ad altre soluzioni
+		\bigskip
+		\item Frequenza di oscillazione:\\
+			\smallskip
+			{\large $ f_{osc} = \frac{1}{2\pi\sqrt{LC}}$}
+	\end{itemize}
+\end{columns}
 \end{frame}
 %
 %% Oscillator types
 \begin{frame}
 \frametitle{Tipologie di oscillatore considerate}
+\begin{columns}
+	\column[t]{0.5\textwidth}
+	\begin{flushleft}
+      \begin{figure}
+      \includegraphics[width=\textwidth]{images/tipo1.pdf}
+      \end{figure}
+      \end{flushleft}
+	\center{Oscillatore "Tipo 1"}
 
+	\column[t]{0.5\textwidth}
+      \begin{flushright}
+      \begin{figure}
+      \includegraphics[width=\textwidth]{images/tipo2.pdf}
+      \end{figure}
+      \end{flushright}
+	\center{Oscillatore "Tipo 2"}
+\end{columns}
 \end{frame}
 %
-%% Transformer model
+%% Transformer model (maybe join with the theoretical model)
 \begin{frame}
 \frametitle{Modello del trasformatore}
-
+\begin{figure}
+\includegraphics[height=0.4\textheight]{images/trasf_model.pdf}
+\end{figure}
+\begin{itemize}
+	\item Modello con resistenza in serie al primario
+	\item Si trascurano le capacit\`a parassite.
+	\item $R_s=2\pi f_{osc} \frac{L_1}{Q}\, ,\;\; Q=25$
+\end{itemize}
 \end{frame}
 %
 %% Theorical model
 \begin{frame}
 \frametitle{Modello teorico}
+\begin{columns}
+	\column[t]{0.5\textwidth}
+	I MOSFET producono un'onda sinusoidale di ampiezza $2V_{DD}$.
+	\begin{figure}
+	\includegraphics[width=\textwidth]{images/cir_model.pdf}
+	\end{figure}
+	Applicando le trasformazioni serie-parallelo:
+	\begin{figure}
+	\includegraphics[width=\textwidth]{images/cir_model3.pdf}
+	\end{figure}
 
+	\column[t]{0.5\textwidth}
+	Induttanze a capacit\`a sono in risonanza. Si ottiene un partitore
+	resistivo.
+	\medskip
+	$$ \eta_t = \frac{2\pi f_{osc} K^2 \frac{L_2}{Q}}{2\pi f_{osc} K^2
+	\frac{L_2}{Q} + R_{ant}} $$
+	\medskip
+	\center\framebox{$\eta_t \rightarrow 1 \Longleftrightarrow L_2 \rightarrow
+	+\infty $}
+\end{columns}
 \end{frame}
 %
 %% Simulation results
 \begin{frame}
 \frametitle{Risultati delle simulazioni}
-
+\begin{figure}
+\includegraphics[height=0.9\textwidth, angle=-90]{efficienza.pdf}
+\end{figure}
+\end{frame}
+% some more results
+\begin{frame}
+\begin{itemize}
+	\vfill
+	\item Efficienza raggiunta:
+	\begin{itemize}
+		\item Tipo 1: $29,4\%$
+		\item Tipo 2: $28,1\%$
+	\end{itemize}
+	\vfill
+	\item Funzionamento impulsato:
+	\begin{itemize}
+		\item Accensione e spegnimento non istantanei 
+		\item Tipo 1: ritardi marginalmente controllabili
+		\item Tipo 2: più rapido, migliore controllo sull'inviluppo
+	\end{itemize}
+	\vfill
+\end{itemize}
 \end{frame}
 %
 %% Conclusion
 \begin{frame}
 \frametitle{Conclusioni}
-
+\begin{itemize}
+	\vfill
+      \item Differenza trascurabile tra l'efficienza delle due tipologie
+      \vfill
+      \item Oltre all'efficienza, devono essere considerati:
+	\begin{itemize}
+            \item Area occupata dal circuito
+            \item Consumo dinamico di potenza
+      	\item Tempi di accensione e spegnimento
+      \end{itemize}
+      \vfill
+	\item Sviluppi futuri:
+	\begin{itemize}
+		\item Approfondimento degli effetti dovuti all'inviluppo
+		\item Valutazione del \emph{layout} del circuito
+		\item Aumentare l'accuratezza del modello del trasformatore
+	\end{itemize}
+	\vfill
+\end{itemize}
 \end{frame}
 \end{document}

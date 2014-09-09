@@ -13,6 +13,9 @@ tesi.pdf: prepare main.bbl
 	@$(PDFLATEX) tex/tesi.tex $(COLOR)
 	@$(PDFLATEX) tex/tesi.tex $(COLOR)
 
+slide.pdf: efficienza.pdf tex/slide.tex
+	@$(PDFLATEX) tex/slide.tex $(COLOR)
+	
 main.bbl: tex/biblio.bib
 	@bibtex tesi
 
