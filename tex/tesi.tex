@@ -297,10 +297,11 @@ volta, a partire dal valore di induttanza al primario, in modo da mantenere il
 fattore di qualità Q a 25 per una frequenza di 8GHz.\\
 La formula che lega il fattore di qualità al valore di $L_1$ è:
 $ Q = 2\pi f_{osc} \frac{L_1}{R_s} $,\\
-dove $R_p$ è la resistenza parassita al primario e $ f_{osc}=8GHz $.
+dove $R_s$ è la resistenza parassita al primario e $ f_{osc}=8GHz $.
+\vfill
 \begin{figure}[h]
 \centering
-\includegraphics[height=0.34\textheight]{images/trasf_model.pdf}
+\includegraphics[height=0.32\textheight]{images/trasf_model.pdf}
 \caption{Modello di trasformatore usato nelle simulazioni}
 \end{figure}
 \clearpage % pictures please
@@ -368,8 +369,8 @@ di Figura 2.7,
 \begin{description}
 \item $ R_p = R_s \left( 1+Q^2 \right) $
 \item $ L_1' = L_1 \left( 1+\frac{1}{Q^2} \right) $
-\item $ L_{2e}' = {\left( nK \right)}^2 L_{2e} $
-\item $ R_{ant}' = {\left( nK \right)}^2 R_{ant} $
+\item $ L_{2e}' = {\left( \frac{K}{n} \right)}^2 L_{2e} $
+\item $ R_{ant}' = {\left( \frac{K}{n} \right)}^2 R_{ant} $
 \end{description}
 
 Si applicano infine le trasformazioni serie-parallelo alla serie di  $R_{ant}'$
@@ -382,21 +383,26 @@ e $L_{2e}'$. Il circuito che si determina è rappresentato in Figura 2.7.
 
 \noindent Tenendo conto che la capacità $C$ è in risonanza con le induttanze
 del circuito si ottiene un partitore di corrente.\\
-Il  valore di $ R_{ant}'' $ è: $ R_{ant}'' = R_{ant}' \left(1 + Q^2 \right) $.\\
+Detto $Q_2$ il fattore di qualità al secondario, 
+$Q_2 = \frac{\omega_0 L_2}{R_{ant}}$, si ha che il  valore di $ R_{ant}'' $ è:
+$ R_{ant}'' = R_{ant}' \left(1 + Q_2^2 \right) $.\\
 L'efficienza è dunque:
-$ \eta_t = \frac{P_{ant}}{P_{tot}} = \frac{R_p}{R_a'' + R_p} $
-\\Sostituendo ad $R_a''$ ed $R_p$ le rispettive espressioni si ottiene:
-$$ \eta_t = \frac{2\pi f_{osc} K^2 \frac{L_2}{Q}}{2\pi f_{osc} K^2
-\frac{L_2}{Q} + R_{ant}} $$
+$ \eta_t = \frac{P_{ant}}{P_{tot}} = \frac{R_p}{R_a'' + R_p} $\\
+Sostituendo ad $R_a''$ ed $R_p$ le rispettive espressioni si ottiene:
+$$ \eta_t = \frac{a L_2^2}{R_{ant}^2 + (a + b^2)L_2^2} $$
+con $a=(K\omega_0)^2\frac{R_{ant}}{R_s}$ e $ b = (1 - K^2) \omega_0$.\\
+Dalle precedenti formule si evince come, essendoci un legame di proporzionalità
+diretta tra $R_s$ e $L_1$, si abbia proporzionalità inversa tra $a$ e $L_1$.
 
-Dalla precedente formula si evince come, in prima approssimazione, l'efficienza
-teorica sia solo funzione del fattore di qualità Q, del fattore di 
-accoppiamento K e dell'induttanza al secondario $L_2$.\\
-L'unico di questi parametri che sia accessibile in fase di progetto è il
-valore di $L_2$ in quanto  gli altri sono determinati dal \emph{layout} del
+In prima approssimazione l'efficienza teorica è solo funzione del
+fattore di qualità Q, del fattore di accoppiamento K e delle induttanze al 
+primario e al secondario.\\
+Gli unici parametri accessibili in fase di progetto sono i valori delle
+induttanze in quanto gli altri sono determinati dal \emph{layout} del
 trasformatore.\\
-L'efficienza teorica tende ad uno per $L_2$ che tende all'infinito. Il valore
-di $L_2$ deve dunque essere il più grande possibile.
+L'efficienza teorica tende ad uno per $L_2$ che tende all'infinito oppure per
+$L_1$ che tende a zero. Il valore di $L_2$ deve dunque essere il più grande 
+possibile mentre $L_1$ deve essere piccola.
 
 Una volta isolato il contributo del trasformatore è possibile dedicarsi 
 all'effetto introdotto dai componenti attivi nel circuito.\\
@@ -422,8 +428,7 @@ massima efficienza teoricamente raggiungibile.
 \begin{figure}[h]
 \centering
 \includegraphics[height=0.4\textheight]{effteor.pdf}
-\caption{Efficienza per il modello teorico al variare di $L_2$. $ L_1 $ non
-influenza il valore dell'efficienza.}
+\caption{Efficienza per il modello teorico al variare di $L_2$. $ L_1 = 100pH$}
 \end{figure}
 
 \clearpage
@@ -456,6 +461,8 @@ Con riferimento alle figure 2.1, 2.4 e 2.7 si individuano:
 	in grado di sopportare tali correnti la caduta di potenziale su di essi
 	si fa rilevante causando una drastica perdita di efficienza e il
 	passaggio da regime limitato in tensione a regime limitato in corrente.
+	Dal modello teorico si è inoltre visto che $L_1$ deve tendere a zero
+	affinché l'efficienza sia massima.
 
 \item[L2], ovvero l'induttanza al secondario. Da essa dipende il rapporto di
 	trasformazione e l'efficienza complessiva del trasformatore.\\
@@ -741,8 +748,8 @@ funzionamento impulsato, possono essere oggetto di ulteriori ricerche.
 \chapter{Conclusione}
 In questa tesi si sono analizzati due oscillatori LC \emph{cross-coupled} per
 impulsatori Ultra-Wideband. Le analisi effettuate prevedono sia lo studio di un
-modello teorico sia la simulazione al calcolatore dei circuiti.\\
-L'obiettivo finale è stato quello di fornire la soluzione circuitale che
+modello teorico sia la simulazione dei circuiti al calcolatore.\\
+L'obiettivo perseguito è stato quello di fornire la soluzione circuitale che
 massimizza l'efficienza energetica in trasmissione, espressa come il rapporto
 tra la potenza erogata all'antenna e quella totale dissipata dal circuito.
 

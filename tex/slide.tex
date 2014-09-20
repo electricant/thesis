@@ -9,11 +9,13 @@
 \usetheme{Padova}
 % Include the following packages:
 \usepackage{mathtools}
+\usepackage{pgfpages}
+\pgfpagesuselayout{resize to}[a4paper,landscape,border shrink=5mm]
 
 \title{Studio dell'efficienza di oscillatori LC integrati per impulsatori
 	Ultra-Wideband}
 \author{Laureando: Paolo Scaramuzza \\ Relatore: Andrea Neviani}
-\date{30 Settembre 2014}
+\date{29 Settembre 2014}
 
 \begin{document}
 %
@@ -43,6 +45,8 @@
 \begin{frame}
 \frametitle{La radio a impulsi UWB}
 \begin{itemize}
+	\item Trasmette i dati sotto forma di impulsi
+	\vfill
 	\item Impieghi:
 	\begin{itemize}
 		\item Trasmissione a corto raggio
@@ -111,7 +115,7 @@
 \begin{itemize}
 	\item Modello con resistenza in serie al primario
 	\item Si trascurano le capacit\`a parassite.
-	\item $R_s=2\pi f_{osc} \frac{L_1}{Q}\, ,\;\; Q=25$
+	\item $R_s=\omega_0 \frac{L_1}{Q}\, ,\;\; Q=25$
 \end{itemize}
 \end{frame}
 %
@@ -133,22 +137,58 @@
 	Induttanze a capacit\`a sono in risonanza. Si ottiene un partitore
 	resistivo.
 	\medskip
-	$$ \eta_t = \frac{2\pi f_{osc} K^2 \frac{L_2}{Q}}{2\pi f_{osc} K^2
-	\frac{L_2}{Q} + R_{ant}} $$
+	$$ \eta_t = \frac{aL_2^2}{R_{ant}^2 + ( a + b^2 )^2L_2^2} $$
+	$ a = (K\omega_0)^2\frac{R_{ant}}{R_s} $\\
+	\smallskip
+	$ b = (1 - K^2)\omega_0 $\\
 	\medskip
-	\center\framebox{$\eta_t \rightarrow 1 \Longleftrightarrow L_2 \rightarrow
-	+\infty $}
+	\center\framebox{$\eta_t \rightarrow 1 \Longleftrightarrow L_1
+	\rightarrow 0, L_2 \rightarrow +\infty $}
 \end{columns}
 \end{frame}
 %
 %% Simulation results
 \begin{frame}
 \frametitle{Risultati delle simulazioni}
+\vspace{-0.6cm} % correct wrong figure margins
 \begin{figure}
-\includegraphics[height=0.9\textwidth, angle=-90]{efficienza.pdf}
+\centering
+\includegraphics[height=0.8\textheight]{efficienza.pdf}
 \end{figure}
 \end{frame}
 % some more results
+\begin{frame}
+\begin{columns}
+\column[t]{0.75\textwidth}
+\begin{figure}
+\includegraphics[width=\textwidth]{images/tipo1-impulsato.pdf}
+\end{figure}
+Oscillatore di Tipo 1, funzionamento impulsato.
+
+\column[t]{0.25\textwidth}
+      \vspace{0.5cm}
+      \begin{figure}
+      \includegraphics[width=1.5\textwidth]{images/tipo1.pdf}
+      \end{figure}
+\end{columns}
+\end{frame}
+
+\begin{frame}
+\begin{columns}
+\column[t]{0.75\textwidth}
+\begin{figure}
+\includegraphics[width=\textwidth]{images/tipo2-impulsato.pdf}
+\end{figure}
+Oscillatore di Tipo 2, funzionamento impulsato.
+
+\column[t]{0.25\textwidth}
+	\vspace{0.5cm}
+	\begin{figure}
+	\includegraphics[width=1.3\textwidth]{images/tipo2.pdf}
+	\end{figure}
+\end{columns}
+\end{frame}
+
 \begin{frame}
 \begin{itemize}
 	\vfill

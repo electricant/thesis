@@ -31,7 +31,7 @@ effteor.pdf: graphs/effteor_plot
 efficienza.pdf: graphs/efficienza.dat graphs/eff_plot
 	@gnuplot graphs/eff_plot
 	@ps2pdf efficienza.ps
-	
+	@pdfcrop efficienza.pdf efficienza.pdf	
 clean: soft-clean
 	@rm -f *.pdf
 

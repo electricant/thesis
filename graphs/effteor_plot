@@ -3,11 +3,16 @@
 clear
 set xlabel 'L2'
 set ylabel 'efficienza teorica'
-set xr [0:2E-6]
+set xr [0:8E-10]
 set yr [0:0.65]
-n(x) = (2*pi*8E9*0.0117*x)
-plot 0.63*n(x)/(n(x) + 50) lw 4 title ''
-set title "Efficienza teorica per f=8GHz, k=0.54 e Q=25"
+omega=2*pi*8E9
+Rs = omega*100E-12*0.04
+a=((0.54*omega)**2)*50/Rs
+b=(1-0.29)*omega
+n(x) = (a*(x**2))
+d(x) = (2500 + (a + b)*(x**2))
+plot 0.63*n(x)/d(x) lw 4 title ''
+set title "Efficienza teorica per f=8GHz, k=0.54 e Q=25, L1=100pH"
 set term postscript 18
 set output "effteor.ps"
 replot
